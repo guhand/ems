@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: go-app
+    env: go
+    plan: free
+    region: oregon
+    buildCommand: "go build -o app"
+    startCommand: "./app"
+    envVars:
+      - key: GO_ENV
+        value: production
+    autoDeploy: true
