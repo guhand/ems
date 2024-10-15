@@ -4,7 +4,7 @@ services:
     env: go
     plan: free
     region: oregon
-    buildCommand: "go build -o app"
+    buildCommand: "go build -o app ./main.go"
     startCommand: "./app"
     envVars:
       - key: GO_ENV
