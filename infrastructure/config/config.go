@@ -52,7 +52,7 @@ func Load() error {
 }
 
 func getEnvOrError(key string) string {
-	if value, exists := os.Getenv(key); exists {
+	if value := os.Getenv(key); value != "" {
 		return value
 	}
 
