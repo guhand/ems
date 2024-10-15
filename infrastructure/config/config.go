@@ -26,8 +26,13 @@ type Configuration struct {
 var Config *Configuration
 
 func Load() error {
-	if err := godotenv.Load(); err != nil {
-		return fmt.Errorf("failed to load .env file: %w", err)
+	// Check if running in development mode
+	if os.Getenv("ENV") != "production" {
+		// Attempt to load .env file, but ignore the error in production
+		err := godotenv.Load()
+		if err != nil {
+			log.Println("No .env file found, relying on environment variables")
+		}
 	}
 
 	Config = &Configuration{
@@ -47,7 +52,7 @@ func Load() error {
 }
 
 func getEnvOrError(key string) string {
-	if value, exists := os.LookupEnv(key); exists {
+	if value, exists := os.Getenv(key); exists {
 		return value
 	}
 
