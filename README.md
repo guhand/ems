@@ -4,6 +4,14 @@
 
 The **Employee Management System** is a RESTful API service built with Go. It provides endpoints for managing employees, departments, roles, and permissions. This system allows administrators to create, update, and delete employee records, manage department assignments, and handle role-based access control (RBAC). Additional features include leave management, permission management, notice board, and dashboard functionalities.
 
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+
 ## Features
 
 - **Employee Management**: CRUD operations for employee records.
@@ -38,7 +46,7 @@ The **Employee Management System** is a RESTful API service built with Go. It pr
    git clone https://github.com/guhand/ems.git
    ```
 
-2. Change the directory:
+2. Navigate to the project directory:
 
    ```bash
    cd employee-management-system
