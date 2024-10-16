@@ -55,7 +55,7 @@ func (r *noticeRepository) FetchActiveUserNotices(roleID uint, filters *request.
 		queryParams = append(queryParams, []interface{}{constant.HR, constant.DepartmentLead})
 	}
 
-	query.WriteString(` LIMIT ? OFFSET ?`)
+	query.WriteString(` ORDER BY un.CreatedAt DESC LIMIT ? OFFSET ?`)
 	queryParams = append(queryParams, itemsPerPage, (filters.Page-1)*uint(itemsPerPage))
 
 	if err := r.db.Raw(query.String(), queryParams...).

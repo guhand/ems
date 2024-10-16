@@ -36,7 +36,7 @@ func (s *Scheduler) removeUsers() {
 		if err := tx.Raw(`
 			SELECT DepartmentMemberID 
 			FROM UserNotice 
-			WHERE NoticeEndDate < ?`, now).Scan(&departmentMemberIDs).Error; err != nil {
+			WHERE IsActive = 1 AND NoticeEndDate < ?`, now).Scan(&departmentMemberIDs).Error; err != nil {
 			return err
 		}
 
@@ -55,6 +55,13 @@ func (s *Scheduler) removeUsers() {
 				WHERE ID IN (
 					SELECT UserID FROM DepartmentMember WHERE ID IN ?
 				)`, now, departmentMemberIDs).Error; err != nil {
+				return err
+			}
+
+			if err := tx.Exec(`
+				UPDATE UserNotice
+				SET IsActive = 0, DeletedAt = ?
+				WHERE DepartmentMemberID IN ?`, time.Now(), departmentMemberIDs).Error; err != nil {
 				return err
 			}
 		}
